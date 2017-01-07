@@ -55,47 +55,50 @@ public class OptionItemView extends View {
     /**
      * 标题
      */
-    private String title = " ";
+    private String title = "";
     /**
      * 标题字体大小
      */
-    private float titleTextSize;
+    private float titleTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+            16, getResources().getDisplayMetrics());
     /**
      * 标题颜色
      */
-    private int titleTextColor;
+    private int titleTextColor = Color.BLACK;
     /**
      * 左边文字
      */
-    private String leftText;
+    private String leftText = "";
     /**
      * 左边文字大小
      */
-    private float leftTextSize;
+    private float leftTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+            16, getResources().getDisplayMetrics());
     /**
      * 左边文字左边距
      */
-    private float leftTextMarginLeft;
+    private float leftTextMarginLeft = -1;
     /**
      * 左边文字颜色
      */
-    private int leftTextColor;
+    private int leftTextColor = Color.BLACK;
     /**
      * 右边文字
      */
-    private String rightText;
+    private String rightText = "";
     /**
      * 右边文字大小
      */
-    private float rightTextSize;
+    private float rightTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+            16, getResources().getDisplayMetrics());
     /**
      * 右边文字颜色
      */
-    private int rightTextColor;
+    private int rightTextColor = Color.BLACK;
     /**
      * 右边文字左边距
      */
-    private int rightTextMarginRight;
+    private int rightTextMarginRight = -1;
 
     private Paint mPaint;
     /**
@@ -127,7 +130,7 @@ public class OptionItemView extends View {
                         16, getResources().getDisplayMetrics()));
 
             } else if (attr == R.styleable.OptionItemView_title_color) {
-                titleTextColor = typedArray.getColor(attr, Color.WHITE);
+                titleTextColor = typedArray.getColor(attr, Color.BLACK);
 
             } else if (attr == R.styleable.OptionItemView_title) {
                 title = typedArray.getString(attr);
@@ -143,7 +146,7 @@ public class OptionItemView extends View {
                 leftTextMarginLeft = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         -1, getResources().getDisplayMetrics()));
             } else if (attr == R.styleable.OptionItemView_left_text_color) {
-                leftTextColor = typedArray.getColor(attr, Color.WHITE);
+                leftTextColor = typedArray.getColor(attr, Color.BLACK);
 
             } else if (attr == R.styleable.OptionItemView_right_text) {
                 rightText = typedArray.getString(attr);
@@ -156,7 +159,7 @@ public class OptionItemView extends View {
                 rightTextMarginRight = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         -1, getResources().getDisplayMetrics()));
             } else if (attr == R.styleable.OptionItemView_right_text_color) {
-                rightTextColor = typedArray.getColor(attr, Color.WHITE);
+                rightTextColor = typedArray.getColor(attr, Color.BLACK);
 
             }
         }

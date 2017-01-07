@@ -9,7 +9,7 @@
 ##***二、使用：***
 ###1、在自己项目中添加本项目依赖：
 
-	compile 'com.lqr.optionitemview:library:1.0.4'
+	compile 'com.lqr.optionitemview:library:1.0.5'
 
 ###2、在布局中使用（属性可选，不设置则不显示）：
 一般图标的高度是控件高度的一半，所以没有做该自定义属性，写死了。

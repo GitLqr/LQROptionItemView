@@ -15,9 +15,9 @@
     <com.lqr.optionitemview.OptionItemView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:background="#000"
         app:left_src="@mipmap/ic_launcher"
         app:left_text="left"
-        app:left_text_color="@color/colorAccent"
         app:left_text_size="20sp"
         app:right_src="@mipmap/ic_launcher"
         app:right_text="right"

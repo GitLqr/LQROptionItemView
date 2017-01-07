@@ -29,6 +29,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.0.1'
     //选项条目控件
-    compile 'com.lqr.optionitemview:library:1.0.2'
+    compile 'com.lqr.optionitemview:library:1.0.5'
     testCompile 'junit:junit:4.12'
 }
