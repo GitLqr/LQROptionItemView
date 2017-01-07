@@ -48,6 +48,30 @@
         }
     });
 
+###4、代码动态修改属性
 
-###4、自定义属性解释
+	setTitleText(String text)
+	setTitleText(int stringId)
+	setTitleColor(int color)
+	setTitleSize(int sp)
+
+	setLeftText(String text)
+	setLeftText(int stringId)
+	setLeftTextSize(int sp)
+	setLeftTextColor(int color)
+	setLeftTextMarginLeft(int dp)
+	setLeftImage(Bitmap bitmap)
+	showLeftImg(boolean flag)
+	showLeftText(boolean flag)
+
+	setRightImage(Bitmap bitmap)
+	setRightText(String text)
+	setRightText(int stringId)
+	setRightTextColor(int color)
+	setRightTextSize(int sp)
+	setRightTextMarginRight(int dp)
+	showRightImg(boolean flag)
+	showRightText(boolean flag)
+
+###5、自定义属性解释
 ![image](screenshots/2.png)

@@ -326,6 +326,11 @@ public class OptionItemView extends View {
         invalidate();
     }
 
+    public void setLeftTextMarginLeft(int dp) {
+        leftTextMarginLeft = dp2px(mContext, dp);
+        invalidate();
+    }
+
     public void setLeftImage(Bitmap bitmap) {
         leftImage = bitmap;
         invalidate();
@@ -358,6 +363,11 @@ public class OptionItemView extends View {
 
     public void setRightTextSize(int sp) {
         leftTextSize = sp2px(mContext, sp);
+        invalidate();
+    }
+
+    public void setRightTextMarginRight(int dp) {
+        rightTextMarginRight = dp2px(mContext, dp);
         invalidate();
     }
 
@@ -394,11 +404,13 @@ public class OptionItemView extends View {
         this.listener = listener;
     }
 
-    /**
-     * sp转px
-     */
     private int sp2px(Context context, float spVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
                 spVal, context.getResources().getDisplayMetrics());
+    }
+
+    private int dp2px(Context context, float dpVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpVal, context.getResources().getDisplayMetrics());
     }
 }
