@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lqr.MainActivity">
+
+    <com.lqr.optionitemview.OptionItemView
+        android:id="@+id/oiv"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#abcdef"
+        app:left_src="@mipmap/ic_launcher"
+        app:left_text="left"
+        app:left_text_color="#f00"
+        app:left_text_margin_left="10dp"
+        app:left_text_size="15sp"
+        app:right_src="@mipmap/ic_launcher"
+        app:right_text="right"
+        app:right_text_color="#00f"
+        app:right_text_margin_right="30dp"
+        app:right_text_size="16sp"
+        app:title="title"
+        app:title_color="#0f0"
+        app:title_size="18sp"/>
+</RelativeLayout>
