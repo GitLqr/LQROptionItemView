@@ -55,7 +55,7 @@ public class OptionItemView extends View {
     /**
      * 标题
      */
-    private String title;
+    private String title = " ";
     /**
      * 标题字体大小
      */
@@ -190,8 +190,8 @@ public class OptionItemView extends View {
 
         //抗锯齿
         mPaint.setAntiAlias(true);
-        mPaint.setTextSize(titleTextSize);
-        mPaint.setColor(titleTextColor);
+        mPaint.setTextSize(titleTextSize > leftTextSize ? titleTextSize > rightTextSize ? titleTextSize : rightTextSize : leftTextSize > rightTextSize ? leftTextSize : rightTextSize);
+//        mPaint.setTextSize(titleTextSize);
         mPaint.setStyle(Paint.Style.FILL);
         //文字水平居中
         mPaint.setTextAlign(Paint.Align.CENTER);
@@ -200,10 +200,14 @@ public class OptionItemView extends View {
         Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
         int baseLine = (int) ((rect.bottom + rect.top - fontMetrics.bottom - fontMetrics.top) / 2);
 
-        // 正常情况，将字体居中
-        canvas.drawText(title, rect.centerX(), baseLine, mPaint);
-        // 取消使用掉的快
-        rect.bottom -= mTextBound.height();
+        if (!title.trim().equals("")) {
+            // 正常情况，将字体居中
+            mPaint.setColor(titleTextColor);
+            canvas.drawText(title, rect.centerX(), baseLine, mPaint);
+            // 取消使用掉的快
+            rect.bottom -= mTextBound.height();
+        }
+
 
         if (leftImage != null && isShowLeftImg) {
             // 计算左图范围
