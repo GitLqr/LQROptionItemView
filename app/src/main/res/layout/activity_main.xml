@@ -13,19 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#abcdef"
+        app:left_image_margin_left="20dp"
+        app:left_image_margin_right="20dp"
         app:left_src="@mipmap/ic_launcher"
-        app:left_text_size="15sp"
-        app:right_text="right"
-        app:right_text_size="16sp"/>
-        <!--
-        app:left_text_color="#f00"
-        app:title="title"
         app:left_text="left"
+        app:left_text_color="#f00"
+        app:left_text_margin_left="20dp"
+        app:left_text_size="15sp"
+        app:right_image_margin_left="20dp"
+        app:right_image_margin_right="20dp"
         app:right_src="@mipmap/ic_launcher"
-        app:right_text_color="#00f"
-        app:title_color="#0f0"
-        app:left_text_margin_left="10dp"
-        app:right_text_margin_right="30dp"
-        app:title_size="18sp"
-        -->
+        app:right_text="right"
+        app:right_text_color="#f00"
+        app:right_text_margin_right="20dp"
+        app:right_text_size="16sp"
+        app:title="title"
+        app:title_color="#00f"/>
 </RelativeLayout>

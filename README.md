@@ -9,30 +9,32 @@
 ##***二、使用：***
 ###1、在自己项目中添加本项目依赖：
 
-	compile 'com.lqr.optionitemview:library:1.0.5'
+	compile 'com.lqr.optionitemview:library:1.0.6'
 
 ###2、在布局中使用（属性可选，不设置则不显示）：
 一般图标的高度是控件高度的一半，所以没有做该自定义属性，写死了。
 
-	<com.lqr.library.OptionItemView
-		android:id="@+id/oiv"
+	<com.lqr.optionitemview.OptionItemView
+        android:id="@+id/oiv"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#abcdef"
+        app:left_image_margin_left="20dp"
+        app:left_image_margin_right="20dp"
         app:left_src="@mipmap/ic_launcher"
         app:left_text="left"
         app:left_text_color="#f00"
-        app:left_text_margin_left="10dp"
+        app:left_text_margin_left="20dp"
         app:left_text_size="15sp"
+        app:right_image_margin_left="20dp"
+        app:right_image_margin_right="20dp"
         app:right_src="@mipmap/ic_launcher"
         app:right_text="right"
-        app:right_text_color="#00f"
-        app:right_text_margin_right="30dp"
+        app:right_text_color="#f00"
+        app:right_text_margin_right="20dp"
         app:right_text_size="16sp"
         app:title="title"
-        app:title_color="#0f0"
-        app:title_size="18sp"/>
-
+        app:title_color="#00f"/>
 ###3、监听左图标和右图标的点击事件
 
 	OptionItemView oiv = (OptionItemView) findViewById(R.id.oiv);
@@ -60,6 +62,8 @@
 	setLeftTextSize(int sp)
 	setLeftTextColor(int color)
 	setLeftTextMarginLeft(int dp)
+	setLeftImageMarginLeft(int dp)
+	setLeftImageMarginRight(int dp)
 	setLeftImage(Bitmap bitmap)
 	showLeftImg(boolean flag)
 	showLeftText(boolean flag)
@@ -70,8 +74,10 @@
 	setRightTextColor(int color)
 	setRightTextSize(int sp)
 	setRightTextMarginRight(int dp)
+	setRightImageMarginLeft(int dp)
+	setRightImageMarginRight(int dp)
 	showRightImg(boolean flag)
 	showRightText(boolean flag)
 
-###5、自定义属性解释
+###5、个别自定义属性解释
 ![image](screenshots/2.png)

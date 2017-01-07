@@ -75,9 +75,17 @@ public class OptionItemView extends View {
     private float leftTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
             16, getResources().getDisplayMetrics());
     /**
-     * 左边文字左边距
+     * 左字左边距
      */
-    private float leftTextMarginLeft = -1;
+    private int leftTextMarginLeft = -1;
+    /**
+     * 左图左边距
+     */
+    private int leftImageMarginLeft = -1;
+    /**
+     * 左图右边距
+     */
+    private int leftImageMarginRight = -1;
     /**
      * 左边文字颜色
      */
@@ -96,9 +104,17 @@ public class OptionItemView extends View {
      */
     private int rightTextColor = Color.BLACK;
     /**
-     * 右边文字左边距
+     * 右字右边距
      */
     private int rightTextMarginRight = -1;
+    /**
+     * 右图左边距
+     */
+    private int rightImageMarginLeft = -1;
+    /**
+     * 右图右边距
+     */
+    private int rightImageMarginRight = -1;
 
     private Paint mPaint;
     /**
@@ -145,18 +161,28 @@ public class OptionItemView extends View {
             } else if (attr == R.styleable.OptionItemView_left_text_margin_left) {
                 leftTextMarginLeft = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         -1, getResources().getDisplayMetrics()));
+            } else if (attr == R.styleable.OptionItemView_left_image_margin_left) {
+                leftImageMarginLeft = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        -1, getResources().getDisplayMetrics()));
+            } else if (attr == R.styleable.OptionItemView_left_image_margin_right) {
+                leftImageMarginRight = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        -1, getResources().getDisplayMetrics()));
             } else if (attr == R.styleable.OptionItemView_left_text_color) {
                 leftTextColor = typedArray.getColor(attr, Color.BLACK);
 
             } else if (attr == R.styleable.OptionItemView_right_text) {
                 rightText = typedArray.getString(attr);
-
             } else if (attr == R.styleable.OptionItemView_right_text_size) {
                 rightTextSize = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
                         16, getResources().getDisplayMetrics()));
-
             } else if (attr == R.styleable.OptionItemView_right_text_margin_right) {
                 rightTextMarginRight = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        -1, getResources().getDisplayMetrics()));
+            } else if (attr == R.styleable.OptionItemView_right_image_margin_left) {
+                rightImageMarginLeft = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        -1, getResources().getDisplayMetrics()));
+            } else if (attr == R.styleable.OptionItemView_right_image_margin_right) {
+                rightImageMarginRight = typedArray.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         -1, getResources().getDisplayMetrics()));
             } else if (attr == R.styleable.OptionItemView_right_text_color) {
                 rightTextColor = typedArray.getColor(attr, Color.BLACK);
@@ -214,7 +240,7 @@ public class OptionItemView extends View {
 
         if (leftImage != null && isShowLeftImg) {
             // 计算左图范围
-            rect.left = mWidth / 32;
+            rect.left = leftImageMarginLeft >= 0 ? leftImageMarginLeft : mWidth / 32;
             rect.right = rect.left + mHeight * 1 / 2;
             rect.top = mHeight / 4;
             rect.bottom = mHeight * 3 / 4;
@@ -222,7 +248,7 @@ public class OptionItemView extends View {
         }
         if (rightImage != null && isShowRightImg) {
             // 计算右图范围
-            rect.right = mWidth * 31 / 32;
+            rect.right = mWidth - (rightImageMarginRight >= 0 ? rightImageMarginRight : mWidth / 32);
             rect.left = rect.right - mHeight * 1 / 2;
             rect.top = mHeight / 4;
             rect.bottom = mHeight * 3 / 4;
@@ -231,41 +257,32 @@ public class OptionItemView extends View {
         if (leftText != null && !leftText.equals("") && isShowLeftText) {
             mPaint.setTextSize(leftTextSize);
             mPaint.setColor(leftTextColor);
-            int w;
-            if (leftTextMarginLeft < 0) {
-                w = mWidth / 32;
-                if (leftImage != null) {
-                    w = mWidth / 32 + mHeight * 1 / 2 + mHeight / 8;
-                }
+            int w = 0;
+            if (leftImage != null) {
+                w += leftImageMarginLeft >= 0 ? leftImageMarginLeft : (mHeight / 8);//增加左图左间距
+                w += mHeight * 1 / 2;//图宽
+                w += leftImageMarginRight >= 0 ? leftImageMarginRight : (mWidth / 32);// 增加左图右间距
+                w += leftTextMarginLeft > 0 ? leftTextMarginLeft : 0;//增加左字左间距
             } else {
-                w = (int) leftTextMarginLeft;
-                if (leftImage != null) {
-                    w = (int) (mWidth / 32 + mHeight * 1 / 2 + leftTextMarginLeft);
-                }
+                w += leftTextMarginLeft >= 0 ? leftTextMarginLeft : (mWidth / 32);//增加左字左间距
             }
+
             mPaint.setTextAlign(Paint.Align.LEFT);
             canvas.drawText(leftText, w, baseLine, mPaint);
         }
         if (rightText != null && !rightText.equals("") && isShowRightText) {
-//            mPaint.setTextSize(rightTextSize);
-//            mPaint.setColor(rightTextColor);
-//            canvas.drawText(rightText, mWidth * 29 / 32, baseLine, mPaint);
             mPaint.setTextSize(rightTextSize);
             mPaint.setColor(rightTextColor);
 
-            int w;
-            if (rightTextMarginRight < 0) {
-                w = mWidth;
-                if (rightImage != null) {
-                    w = mWidth - mWidth / 32 - mHeight * 1 / 2 - mHeight / 8;
-                }
+            int w = mWidth;
+            if (rightImage != null) {
+                w -= rightImageMarginRight >= 0 ? rightImageMarginRight : (mHeight / 8);//增加右图右间距
+                w -= mHeight * 1 / 2;//增加图宽
+                w -= rightImageMarginLeft >= 0 ? rightImageMarginLeft : (mWidth / 32);//增加右图左间距
+                w -= rightTextMarginRight > 0 ? rightTextMarginRight : 0;//增加右字右间距
             } else {
-                w = mWidth - rightTextMarginRight;
-                if (rightImage != null) {
-                    w = mWidth - mWidth / 32 - mHeight * 1 / 2 - rightTextMarginRight;
-                }
+                w -= rightTextMarginRight >= 0 ? rightTextMarginRight : (mWidth / 32);//增加右字右间距
             }
-
 
             // 计算了描绘字体需要的范围
             mPaint.getTextBounds(rightText, 0, rightText.length(), mTextBound);
@@ -333,8 +350,18 @@ public class OptionItemView extends View {
         invalidate();
     }
 
+    public void setLeftImageMarginRight(int dp) {
+        leftImageMarginRight = dp2px(mContext, dp);
+        invalidate();
+    }
+
+    public void setLeftImageMarginLeft(int dp) {
+        this.leftImageMarginLeft = dp2px(mContext, dp);
+        invalidate();
+    }
+
     public void setLeftTextMarginLeft(int dp) {
-        leftTextMarginLeft = dp2px(mContext, dp);
+        this.leftTextMarginLeft = dp2px(mContext, dp);
         invalidate();
     }
 
@@ -373,8 +400,18 @@ public class OptionItemView extends View {
         invalidate();
     }
 
+    public void setRightImageMarginLeft(int dp) {
+        rightImageMarginLeft = dp2px(mContext, dp);
+        invalidate();
+    }
+
+    public void setRightImageMarginRight(int dp) {
+        this.rightImageMarginRight = dp2px(mContext, dp);
+        invalidate();
+    }
+
     public void setRightTextMarginRight(int dp) {
-        rightTextMarginRight = dp2px(mContext, dp);
+        this.rightTextMarginRight = dp2px(mContext, dp);
         invalidate();
     }
 
