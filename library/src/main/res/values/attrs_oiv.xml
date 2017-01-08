@@ -17,5 +17,6 @@
         <attr name="right_image_margin_right" format="dimension"/>
         <attr name="right_text_margin_right" format="dimension"/>
         <attr name="right_text_color" format="color"/>
+        <attr name="splite_mode" format="boolean"/>
     </declare-styleable>
 </resources>

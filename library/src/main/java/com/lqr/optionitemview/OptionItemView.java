@@ -44,10 +44,17 @@ public class OptionItemView extends View {
     private boolean isShowLeftText = true;
     private boolean isShowRightImg = true;
     private boolean isShowRightText = true;
+
+    //拆分模式(默认是false，也就是一个整体)
+    private boolean mSpliteMode = false;
     /**
      * 判断按下开始的位置是否在左
      */
     private boolean leftStartTouchDown = false;
+    /**
+     * 判断按下开始的位置是否在中间
+     */
+    private boolean centerStartTouchDown = false;
     /**
      * 判断按下开始的位置是否在右
      */
@@ -186,7 +193,8 @@ public class OptionItemView extends View {
                         -1, getResources().getDisplayMetrics()));
             } else if (attr == R.styleable.OptionItemView_right_text_color) {
                 rightTextColor = typedArray.getColor(attr, Color.BLACK);
-
+            } else if (attr == R.styleable.OptionItemView_splite_mode) {
+                mSpliteMode = typedArray.getBoolean(attr, false);
             }
         }
         typedArray.recycle();    //回收typeArray
@@ -292,6 +300,9 @@ public class OptionItemView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        //是一个整体，则不拆分各区域的点击
+        if (!mSpliteMode)
+            return super.onTouchEvent(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 int _x = (int) event.getX();
@@ -299,6 +310,8 @@ public class OptionItemView extends View {
                     leftStartTouchDown = true;
                 } else if (_x > mWidth * 7 / 8) {
                     rightStartTouchDown = true;
+                } else {
+                    centerStartTouchDown = true;
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -307,8 +320,11 @@ public class OptionItemView extends View {
                     listener.leftOnClick();
                 } else if (rightStartTouchDown && x > mWidth * 7 / 8 && listener != null) {
                     listener.rightOnClick();
+                } else if (centerStartTouchDown && listener != null) {
+                    listener.centerOnClick();
                 }
                 leftStartTouchDown = false;
+                centerStartTouchDown = false;
                 rightStartTouchDown = false;
                 break;
         }
@@ -435,11 +451,20 @@ public class OptionItemView extends View {
         invalidate();
     }
 
+    public void setSpliteMode(boolean spliteMode) {
+        mSpliteMode = spliteMode;
+    }
+
+    public boolean getSpliteMode() {
+        return mSpliteMode;
+    }
 
     private OnOptionItemClickListener listener;
 
     public interface OnOptionItemClickListener {
         void leftOnClick();
+
+        void centerOnClick();
 
         void rightOnClick();
     }

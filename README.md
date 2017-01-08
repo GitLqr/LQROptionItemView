@@ -9,7 +9,7 @@
 ##***二、使用：***
 ###1、在自己项目中添加本项目依赖：
 
-	compile 'com.lqr.optionitemview:library:1.0.6'
+	compile 'com.lqr.optionitemview:library:1.0.7'
 
 ###2、在布局中使用（属性可选，不设置则不显示）：
 一般图标的高度是控件高度的一半，所以没有做该自定义属性，写死了。
@@ -30,25 +30,43 @@
         app:right_image_margin_right="20dp"
         app:right_src="@mipmap/ic_launcher"
         app:right_text="right"
+        app:splite_mode="true"
         app:right_text_color="#f00"
         app:right_text_margin_right="20dp"
         app:right_text_size="16sp"
         app:title="title"
         app:title_color="#00f"/>
-###3、监听左图标和右图标的点击事件
+###3、点击事件
 
-	OptionItemView oiv = (OptionItemView) findViewById(R.id.oiv);
-    oiv.setOnOptionItemClickListener(new OptionItemView.OnOptionItemClickListener() {
-        @Override
-        public void leftOnClick() {
-            Toast.makeText(getApplicationContext(), "左图标被点击", Toast.LENGTH_SHORT).show();
-        }
+####1）拆分模式
+需要设置split_mode=true，默认是false
 
-        @Override
-        public void rightOnClick() {
-            Toast.makeText(getApplicationContext(), "右图标被点击", Toast.LENGTH_SHORT).show();
-        }
-    });
+	oiv.setOnOptionItemClickListener(new OptionItemView.OnOptionItemClickListener() {
+	    @Override
+	    public void leftOnClick() {
+	        Toast.makeText(getApplicationContext(), "左边被点击", Toast.LENGTH_SHORT).show();
+	    }
+	
+	    @Override
+	    public void centerOnClick() {
+	        Toast.makeText(getApplicationContext(), "中间被点击", Toast.LENGTH_SHORT).show();
+	    }
+	
+	    @Override
+	    public void rightOnClick() {
+	        Toast.makeText(getApplicationContext(), "右边被点击", Toast.LENGTH_SHORT).show();
+	    }
+	});
+
+####2）整体模式
+需要设置split_mode=false，默认是false
+
+	oiv.setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+	        Toast.makeText(getApplicationContext(), "整体被点击", Toast.LENGTH_SHORT).show();
+	    }
+	});
 
 ###4、代码动态修改属性
 
@@ -78,6 +96,9 @@
 	setRightImageMarginRight(int dp)
 	showRightImg(boolean flag)
 	showRightText(boolean flag)
+
+	setSpliteMode(boolean spliteMode)
+	getSpliteMode()
 
 ###5、个别自定义属性解释
 ![image](screenshots/2.png)
