@@ -1,17 +1,17 @@
 # LQROptionItemView
 项目中常用选项条目布局控件
 
-##***一、简述：***
+## ***一、简述：***
 在项目开发中经常遇到类似“设置”功能的需求，一般都要做一些简单的选项条目布局，一个条目可以会用到布局+多个控件（文本或图标），一个条目在xml中布局还算可以接受了，但如果一个设置界面的选项条目有10个，还是一样的布局，这样就显示特别臃肿了吧，而一般一个界面的选项条目有3个以上。为了解决上述问题，本项目诞生了，满足常规的选项条目布局需求，先看下效果。
 
 ![image](screenshots/1.png)
 
-##***二、使用：***
-###1、在自己项目中添加本项目依赖：
+## ***二、使用：***
+### 1、在自己项目中添加本项目依赖：
 
 	compile 'com.lqr.optionitemview:library:1.0.7'
 
-###2、在布局中使用（属性可选，不设置则不显示）：
+### 2、在布局中使用（属性可选，不设置则不显示）：
 一般图标的高度是控件高度的一半，所以没有做该自定义属性，写死了。
 
 	<com.lqr.optionitemview.OptionItemView
@@ -36,9 +36,9 @@
         app:right_text_size="16sp"
         app:title="title"
         app:title_color="#00f"/>
-###3、点击事件
+### 3、点击事件
 
-####1）拆分模式
+#### 1）拆分模式
 需要设置split_mode=true，默认是false
 
 	oiv.setOnOptionItemClickListener(new OptionItemView.OnOptionItemClickListener() {
@@ -58,7 +58,7 @@
 	    }
 	});
 
-####2）整体模式
+#### 2）整体模式
 需要设置split_mode=false，默认是false
 
 	oiv.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@
 	    }
 	});
 
-###4、代码动态修改属性
+### 4、代码动态修改属性
 
 	setTitleText(String text)
 	setTitleText(int stringId)
@@ -100,5 +100,6 @@
 	setSpliteMode(boolean spliteMode)
 	getSpliteMode()
 
-###5、个别自定义属性解释
+### 5、个别自定义属性解释
+
 ![image](screenshots/2.png)
